@@ -1,0 +1,22 @@
+{
+  "name": "hapi-demo",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/defra91/hapi-demo.git"
+  },
+  "author": "Luca De Franceschi <luca.defranceschi.91@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/defra91/hapi-demo/issues"
+  },
+  "homepage": "https://github.com/defra91/hapi-demo#readme",
+  "dependencies": {
+    "hapi": "^13.4.1"
+  }
+}
