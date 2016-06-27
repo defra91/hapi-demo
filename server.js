@@ -1,15 +1,16 @@
 'use strict';
 
 const Hapi = require('hapi');
+const Good = require('good');
 
-const server = new Hapi.Server();
+const Server = new Hapi.Server();
 
-server.connection({
+Server.connection({
 	host: '127.0.0.1',
 	port: 3000
 });
 
-server.route({
+Server.route({
 	method: 'GET',
 	path: '/',
 	handler: function(request, reply) {
@@ -17,7 +18,7 @@ server.route({
 	}
 });
 
-server.route({
+Server.route({
 	method: 'GET',
 	path: '/{name}',
 	handler: function(request, reply) {
@@ -25,9 +26,33 @@ server.route({
 	}
 });
 
-server.start((err) => {
+Server.register({
+	register: Good,
+	options: {
+		reporters: {
+			console: [{
+				module: 'good-squeeze',
+				name: 'Squeeze',
+				args: [{
+					response: '*',
+					log: '*'
+				}]				
+			}, {
+				module: 'good-console'
+			}, 'stdout']
+		}
+	}
+}, (err) => {
 	if (err) {
 		throw err;
 	}
-	console.log('Server running at port 3000');
+
+	Server.start((err) => {
+		if (err) {
+			throw err;
+		}
+
+		Server.log('info', 'Server running at: ' + Server.info.uri);
+	});
+
 });
